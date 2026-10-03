@@ -73,6 +73,7 @@ export default function Home() {
   // Schema preferences
   const [schemaMode, setSchemaMode] = useState<"auto" | SchemaType>("auto");
   const [activeSchema, setActiveSchema] = useState<SchemaType>("child");
+  const [viewMode, setViewMode] = useState<"table" | "cards">("table");
 
   const [facility, setFacility] = useState("");
   const [subcenter, setSubcenter] = useState("");
@@ -254,83 +255,53 @@ export default function Home() {
           <label style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase" }}>
             Target Schema Mode
           </label>
-          <div style={{ display: "flex", gap: "10px", marginTop: "6px", flexWrap: "wrap" }}>
+          <div className="schema-selector-group">
             <button
               type="button"
+              className={`schema-card-btn ${schemaMode === "auto" ? "active-auto" : ""}`}
               onClick={() => setSchemaMode("auto")}
-              style={{
-                flex: "1 1 200px",
-                padding: "10px 14px",
-                borderRadius: "var(--radius-md)",
-                border: schemaMode === "auto" ? "2px solid var(--primary)" : "1px solid var(--border)",
-                background: schemaMode === "auto" ? "var(--primary-light)" : "white",
-                color: schemaMode === "auto" ? "var(--primary)" : "var(--text-main)",
-                fontWeight: 700,
-                cursor: "pointer",
-                textAlign: "left",
-                display: "flex",
-                flexDirection: "column",
-                gap: "2px",
-              }}
             >
-              <span>⚡ Auto-Detect (Recommended)</span>
-              <small style={{ fontWeight: 400, color: "var(--text-muted)", fontSize: "11px" }}>
-                AI analyzes columns &amp; content to pick Child or Mother schema
-              </small>
+              <div className="schema-card-title">
+                <span>⚡</span>
+                <span>Auto-Detect (Recommended)</span>
+              </div>
+              <div className="schema-card-desc">
+                AI analyzes handwriting &amp; columns to pick Child or Mother schema
+              </div>
             </button>
 
             <button
               type="button"
+              className={`schema-card-btn ${schemaMode === "child" ? "active-child" : ""}`}
               onClick={() => {
                 setSchemaMode("child");
                 setActiveSchema("child");
               }}
-              style={{
-                flex: "1 1 200px",
-                padding: "10px 14px",
-                borderRadius: "var(--radius-md)",
-                border: schemaMode === "child" ? "2px solid #16a34a" : "1px solid var(--border)",
-                background: schemaMode === "child" ? "#f0fdf4" : "white",
-                color: schemaMode === "child" ? "#15803d" : "var(--text-main)",
-                fontWeight: 700,
-                cursor: "pointer",
-                textAlign: "left",
-                display: "flex",
-                flexDirection: "column",
-                gap: "2px",
-              }}
             >
-              <span>👶 Child Register (8 Columns)</span>
-              <small style={{ fontWeight: 400, color: "var(--text-muted)", fontSize: "11px" }}>
+              <div className="schema-card-title">
+                <span>👶</span>
+                <span>Child Register (8 Columns)</span>
+              </div>
+              <div className="schema-card-desc">
                 Child Name, DOB, Parents, Address, Mobile
-              </small>
+              </div>
             </button>
 
             <button
               type="button"
+              className={`schema-card-btn ${schemaMode === "mother" ? "active-mother" : ""}`}
               onClick={() => {
                 setSchemaMode("mother");
                 setActiveSchema("mother");
               }}
-              style={{
-                flex: "1 1 200px",
-                padding: "10px 14px",
-                borderRadius: "var(--radius-md)",
-                border: schemaMode === "mother" ? "2px solid #9333ea" : "1px solid var(--border)",
-                background: schemaMode === "mother" ? "#faf5ff" : "white",
-                color: schemaMode === "mother" ? "#7e22ce" : "var(--text-main)",
-                fontWeight: 700,
-                cursor: "pointer",
-                textAlign: "left",
-                display: "flex",
-                flexDirection: "column",
-                gap: "2px",
-              }}
             >
-              <span>🤰 Pregnant Women (24 Columns)</span>
-              <small style={{ fontWeight: 400, color: "var(--text-muted)", fontSize: "11px" }}>
+              <div className="schema-card-title">
+                <span>🤰</span>
+                <span>Pregnant Women (24 Columns)</span>
+              </div>
+              <div className="schema-card-desc">
                 Full ANC tracking: LMP, ANC dates, TT doses, Weight, HRP
-              </small>
+              </div>
             </button>
           </div>
         </div>
@@ -392,7 +363,7 @@ export default function Home() {
             </div>
             <div className="preview-controls">
               <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
-                {file ? `${(file.size / 1024).toFixed(0)} KB • Rotation: ${rotation}°` : "Rotate if sideways"}
+                {file ? `${(file.size / 1024).toFixed(0)} KB • ${rotation}°` : "Rotate if sideways"}
               </span>
               <div className="rotate-btns">
                 <button
@@ -448,11 +419,11 @@ export default function Home() {
             }`}
           >
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                 <span style={{ fontSize: "20px" }}>{SCHEMAS[result.detected_schema].icon}</span>
                 <strong style={{ fontSize: "15px" }}>
-                  AI MATCHED SCHEMA: {SCHEMAS[result.detected_schema].name.toUpperCase()} (
-                  {SCHEMAS[result.detected_schema].columns.length} COLUMNS)
+                  AI MATCHED: {SCHEMAS[result.detected_schema].name.toUpperCase()} (
+                  {SCHEMAS[result.detected_schema].columns.length} COLS)
                 </strong>
                 {result.schema_confidence && (
                   <span className={`badge ${SCHEMAS[result.detected_schema].badgeClass}`}>
@@ -467,24 +438,26 @@ export default function Home() {
               )}
             </div>
 
-            <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+            <div className="schema-switch-row">
               <span style={{ fontSize: "12px", fontWeight: 600 }}>Switch Schema:</span>
-              <button
-                type="button"
-                className={`badge ${activeSchema === "child" ? "badge-green" : "badge-blue"}`}
-                style={{ cursor: "pointer", border: activeSchema === "child" ? "2px solid #16a34a" : "1px solid #cbd5e1" }}
-                onClick={() => switchSchema("child")}
-              >
-                👶 Child (8 Cols)
-              </button>
-              <button
-                type="button"
-                className={`badge ${activeSchema === "mother" ? "badge-purple" : "badge-blue"}`}
-                style={{ cursor: "pointer", border: activeSchema === "mother" ? "2px solid #9333ea" : "1px solid #cbd5e1" }}
-                onClick={() => switchSchema("mother")}
-              >
-                🤰 Mother (24 Cols)
-              </button>
+              <div className="badge-group" style={{ display: "flex", gap: "6px" }}>
+                <button
+                  type="button"
+                  className={`badge ${activeSchema === "child" ? "badge-green" : "badge-blue"}`}
+                  style={{ cursor: "pointer", border: activeSchema === "child" ? "2px solid #16a34a" : "1px solid #cbd5e1" }}
+                  onClick={() => switchSchema("child")}
+                >
+                  👶 Child (8 Cols)
+                </button>
+                <button
+                  type="button"
+                  className={`badge ${activeSchema === "mother" ? "badge-purple" : "badge-blue"}`}
+                  style={{ cursor: "pointer", border: activeSchema === "mother" ? "2px solid #9333ea" : "1px solid #cbd5e1" }}
+                  onClick={() => switchSchema("mother")}
+                >
+                  🤰 Mother (24 Cols)
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -520,7 +493,7 @@ export default function Home() {
         ) : null}
       </section>
 
-      {/* Review & Edit Grid */}
+      {/* Review & Edit Section */}
       {result && (
         <section className="card">
           <div className="table-header-wrap">
@@ -533,76 +506,176 @@ export default function Home() {
                 <strong>&quot;</strong>). Empty cells remain completely blank.
               </div>
             </div>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-              <span className="badge badge-ditto">&quot; = Ditto (Same as above)</span>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
+              {/* View Mode Toggle: Table or Mobile Cards */}
+              <div className="view-toggle-bar">
+                <button
+                  type="button"
+                  className={`view-toggle-btn ${viewMode === "table" ? "active" : ""}`}
+                  onClick={() => setViewMode("table")}
+                  title="Table View (Full Grid)"
+                >
+                  <span>📊</span> Table
+                </button>
+                <button
+                  type="button"
+                  className={`view-toggle-btn ${viewMode === "cards" ? "active" : ""}`}
+                  onClick={() => setViewMode("cards")}
+                  title="Mobile Cards View"
+                >
+                  <span>📱</span> Cards
+                </button>
+              </div>
+              <span className="badge badge-ditto">&quot; = Ditto</span>
               <span className={`badge ${SCHEMAS[activeSchema].badgeClass}`}>
-                {SCHEMAS[activeSchema].icon} {SCHEMAS[activeSchema].columns.length} Columns
+                {SCHEMAS[activeSchema].icon} {SCHEMAS[activeSchema].columns.length} Cols
               </span>
               <span className="badge badge-blue">{result.rows.length} Rows</span>
             </div>
           </div>
 
-          <div className="table-wrap">
-            <table className={activeSchema === "child" ? "table-child" : "table-mother"}>
-              <thead>
-                <tr>
-                  <th className="row-num">#</th>
-                  {activeColumns.map((c) => (
-                    <th key={c.key} title={`Key: ${c.key} (${c.type})`}>
-                      <div>{c.header || c.key}</div>
-                      <div style={{ fontSize: "10px", fontWeight: 400, opacity: 0.8 }}>{c.key}</div>
-                    </th>
+          {/* Swipe Hint for mobile users on Table view */}
+          {viewMode === "table" && (
+            <div className="swipe-hint">
+              <span>👉</span>
+              <span>Swipe table horizontally to view and edit all {SCHEMAS[activeSchema].columns.length} columns</span>
+            </div>
+          )}
+
+          {/* TABLE VIEW */}
+          {viewMode === "table" && (
+            <div className="table-wrap">
+              <table className={activeSchema === "child" ? "table-child" : "table-mother"}>
+                <thead>
+                  <tr>
+                    <th className="row-num">#</th>
+                    {activeColumns.map((c) => (
+                      <th key={c.key} title={`Key: ${c.key} (${c.type})`}>
+                        <div>{c.header || c.key}</div>
+                        <div style={{ fontSize: "10px", fontWeight: 400, opacity: 0.8 }}>{c.key}</div>
+                      </th>
+                    ))}
+                    <th style={{ width: 60 }}>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.rows.map((row, ri) => (
+                    <tr key={ri}>
+                      <td className="row-num">{ri + 1}</td>
+                      {activeColumns.map((c) => {
+                        const raw = row[c.key];
+                        const val =
+                          raw == null ||
+                          raw === "null" ||
+                          raw === "undefined" ||
+                          raw === "-" ||
+                          raw === "--"
+                            ? ""
+                            : raw;
+                        const isDitto = val === '"';
+                        return (
+                          <td key={c.key} className={isDitto ? "is-ditto" : ""}>
+                            <input
+                              type="text"
+                              value={val}
+                              onChange={(e) => updateCell(ri, c.key, e.target.value)}
+                              placeholder=""
+                            />
+                          </td>
+                        );
+                      })}
+                      <td style={{ textAlign: "center" }}>
+                        <button
+                          type="button"
+                          onClick={() => deleteRow(ri)}
+                          style={{
+                            background: "transparent",
+                            border: "none",
+                            color: "#ef4444",
+                            cursor: "pointer",
+                            fontWeight: "bold",
+                            padding: "6px 8px",
+                          }}
+                          title="Delete Row"
+                        >
+                          ✕
+                        </button>
+                      </td>
+                    </tr>
                   ))}
-                  <th style={{ width: 60 }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {result.rows.map((row, ri) => (
-                  <tr key={ri}>
-                    <td className="row-num">{ri + 1}</td>
-                    {activeColumns.map((c) => {
-                      const raw = row[c.key];
-                      const val =
-                        raw == null ||
-                        raw === "null" ||
-                        raw === "undefined" ||
-                        raw === "-" ||
-                        raw === "--"
-                          ? ""
-                          : raw;
-                      const isDitto = val === '"';
-                      return (
-                        <td key={c.key} className={isDitto ? "is-ditto" : ""}>
-                          <input
-                            type="text"
-                            value={val}
-                            onChange={(e) => updateCell(ri, c.key, e.target.value)}
-                            placeholder=""
-                          />
-                        </td>
-                      );
-                    })}
-                    <td style={{ textAlign: "center" }}>
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* MOBILE CARDS VIEW */}
+          {viewMode === "cards" && (
+            <div className="cards-list">
+              {result.rows.map((row, ri) => {
+                const titleLabel =
+                  activeSchema === "child"
+                    ? row.child_name || `Child #${ri + 1}`
+                    : row.mother || `Mother #${ri + 1}`;
+                return (
+                  <div key={ri} className="record-card">
+                    <div className="record-card-header">
+                      <div className="record-card-title">
+                        <span className="badge badge-blue">#{ri + 1}</span>
+                        <strong>{titleLabel}</strong>
+                        {row.address && row.address !== '"' && (
+                          <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>• {row.address}</span>
+                        )}
+                      </div>
                       <button
                         type="button"
                         onClick={() => deleteRow(ri)}
                         style={{
-                          background: "transparent",
-                          border: "none",
-                          color: "#ef4444",
+                          background: "#fee2e2",
+                          border: "1px solid #fca5a5",
+                          borderRadius: "4px",
+                          color: "#b91c1c",
                           cursor: "pointer",
-                          fontWeight: "bold",
+                          fontWeight: 700,
+                          fontSize: "12px",
+                          padding: "4px 10px",
                         }}
-                        title="Delete Row"
+                        title="Delete Record"
                       >
-                        ✕
+                        ✕ Delete
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
+
+                    <div className="record-card-body">
+                      {activeColumns.map((c) => {
+                        const raw = row[c.key];
+                        const val =
+                          raw == null ||
+                          raw === "null" ||
+                          raw === "undefined" ||
+                          raw === "-" ||
+                          raw === "--"
+                            ? ""
+                            : raw;
+                        const isDitto = val === '"';
+                        return (
+                          <div key={c.key} className="record-card-field">
+                            <label className="record-card-label">{c.header || c.key}</label>
+                            <input
+                              type="text"
+                              className={`record-card-input ${isDitto ? "is-ditto" : ""}`}
+                              value={val}
+                              onChange={(e) => updateCell(ri, c.key, e.target.value)}
+                              placeholder=""
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <div className="table-footer">
             <button type="button" className="btn btn-secondary" onClick={addRow}>
