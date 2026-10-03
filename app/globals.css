@@ -632,199 +632,223 @@ table.table-child td input {
 /* Schema Selector Cards */
 .schema-selector-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 10px;
-  margin-top: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .schema-card-btn {
-  padding: 12px 14px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--border);
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border);
   background: white;
   color: var(--text-main);
   cursor: pointer;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  transition: all 0.15s ease;
+  gap: 5px;
+  transition: all 0.2s ease;
   user-select: none;
 }
 
 .schema-card-btn:hover {
   border-color: var(--border-strong);
   background: var(--surface-subtle);
+  transform: translateY(-1px);
 }
 
 .schema-card-btn.active-auto {
   border-color: var(--primary);
   background: var(--primary-light);
   color: var(--primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
 }
 
 .schema-card-btn.active-child {
   border-color: #16a34a;
   background: #f0fdf4;
   color: #15803d;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.12);
 }
 
 .schema-card-btn.active-mother {
   border-color: #9333ea;
   background: #faf5ff;
   color: #7e22ce;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.12);
 }
 
 .schema-card-title {
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 800;
+  font-size: 15px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .schema-card-desc {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 /* View Mode Toggle */
 .view-toggle-bar {
   display: inline-flex;
   background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
   padding: 3px;
-  gap: 3px;
+  gap: 4px;
 }
 
 .view-toggle-btn {
   border: none;
   background: transparent;
-  padding: 5px 11px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   transition: all 0.15s;
 }
 
 .view-toggle-btn.active {
   background: white;
   color: var(--primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 /* Mobile Swipe Hint */
 .swipe-hint {
   display: none;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 8px;
+  font-size: 13px;
   font-weight: 600;
   color: #1e40af;
   background: #eff6ff;
-  border: 1px dashed #bfdbfe;
-  border-radius: var(--radius-sm);
-  padding: 8px 12px;
-  margin-bottom: 12px;
+  border: 1.5px dashed #bfdbfe;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-bottom: 14px;
 }
 
 /* Mobile Record Cards List */
 .cards-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 10px;
+  gap: 18px;
+  margin-top: 14px;
 }
 
 .record-card {
   background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.15s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
 }
 
 .record-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   border-color: var(--border-strong);
 }
 
 .record-card-header {
   background: #f8fafc;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
+  padding: 14px 18px;
+  border-bottom: 1.5px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .record-card-title {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
   color: var(--navy);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .record-card-body {
-  padding: 14px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .record-card-field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+}
+
+.record-card-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .record-card-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: #334155;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
+.record-card-key-badge {
+  font-size: 11px;
+  color: var(--text-light);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
 .record-card-input {
   width: 100%;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 8px 10px;
-  font-size: 14px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 16px;
   background: white;
   color: var(--text-main);
-  transition: border-color 0.15s;
+  min-height: 48px;
+  transition: all 0.15s ease;
 }
 
 .record-card-input:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 .record-card-input.is-ditto {
   background: var(--ditto-badge);
   color: var(--ditto-text);
-  font-weight: 800;
+  font-weight: 900;
+  font-size: 22px;
   text-align: center;
+  border-color: #a5b4fc;
 }
 
 /* Spinner */
 .spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top-color: white;
   animation: spin 0.8s linear infinite;
@@ -834,181 +858,326 @@ table.table-child td input {
   to { transform: rotate(360deg); }
 }
 
-/* Mobile & Tablet Responsive Media Queries */
+/* Tablet Media Query (<= 900px) */
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .upload-grid { grid-template-columns: 1fr; }
   .container {
     width: 100%;
-    padding: 0 16px 40px;
+    padding: 0 18px 40px;
   }
 }
 
+/* Mobile Screens Media Query (<= 768px): Large, Vertically Stacked Controls */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 12px 40px;
+  html, body {
+    font-size: 16px;
   }
 
+  .container {
+    width: 100%;
+    padding: 0 14px 50px;
+  }
+
+  /* Top Navigation */
   .top-nav {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    padding: 14px 0;
-    margin-bottom: 16px;
+    gap: 14px;
+    padding: 16px 0;
+    margin-bottom: 18px;
   }
 
   .brand {
-    gap: 10px;
+    gap: 12px;
+    width: 100%;
   }
 
   .brand-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 17px;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    flex-shrink: 0;
   }
 
   .brand-title {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 800;
     line-height: 1.25;
   }
 
   .brand-subtitle {
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-muted);
   }
 
   .nav-badges {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 6px;
   }
 
   .nav-badges .badge {
-    font-size: 11px;
-    padding: 3px 8px;
+    font-size: 13px;
+    padding: 6px 12px;
+    justify-content: center;
+    border-radius: var(--radius-sm);
   }
 
+  /* Cards */
   .card {
-    padding: 16px 14px;
-    border-radius: var(--radius-md);
-    margin-bottom: 16px;
+    padding: 18px 14px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 18px;
   }
 
   .card-title {
-    font-size: 15px;
-    margin-bottom: 14px;
+    font-size: 17px;
+    margin-bottom: 16px;
   }
 
+  /* Schema Selector - Full-width vertical cards */
   .schema-selector-group {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
+  .schema-card-btn {
+    padding: 16px;
+    min-height: 72px;
+    border-radius: var(--radius-md);
+  }
+
+  .schema-card-title {
+    font-size: 16px;
+  }
+
+  .schema-card-desc {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* Form Fields */
+  .field {
+    gap: 8px;
+  }
+
+  .field label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .field select, .field input {
+    font-size: 16px;
+    padding: 12px 14px;
+    min-height: 48px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Drop Zone */
   .drop-zone {
-    min-height: 150px;
-    padding: 20px 14px;
+    min-height: 180px;
+    padding: 28px 16px;
+    border-radius: var(--radius-lg);
   }
 
   .drop-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 20px;
-    margin-bottom: 8px;
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 
   .drop-title {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 700;
   }
 
   .drop-subtitle {
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 1.4;
   }
 
+  /* Preview Pane */
   .preview-pane {
-    padding: 12px;
+    padding: 14px;
+    border-radius: var(--radius-lg);
   }
 
   .preview-img-wrap {
-    height: 170px;
+    height: 220px;
+    border-radius: var(--radius-md);
   }
 
+  .preview-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .rotate-btns {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-icon {
+    flex: 1;
+    justify-content: center;
+    min-height: 46px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+  }
+
+  /* Action Buttons */
   .action-bar {
     flex-direction: column;
     width: 100%;
-    gap: 10px;
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: 18px;
   }
 
-  .action-bar .btn {
+  .action-bar .btn, .btn {
     width: 100%;
     justify-content: center;
-    padding: 13px 18px;
-    font-size: 14px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 800;
+    min-height: 52px;
+    border-radius: var(--radius-md);
   }
 
+  /* Detected Banner */
   .detected-banner {
     flex-direction: column;
     align-items: flex-start;
-    padding: 12px 14px;
-    gap: 12px;
+    padding: 16px;
+    gap: 14px;
+    border-radius: var(--radius-lg);
   }
 
   .detected-banner .schema-switch-row {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
+  .detected-banner .schema-switch-row .badge-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .detected-banner .schema-switch-row .badge-group button {
+    width: 100%;
+    justify-content: center;
+    min-height: 46px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+  }
+
+  /* Alerts */
+  .alert {
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.45;
+    border-radius: var(--radius-md);
+  }
+
+  /* Review Section Header */
   .table-header-wrap {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 14px;
+  }
+
+  .view-toggle-bar {
+    width: 100%;
+    display: flex;
+  }
+
+  .view-toggle-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 800;
+    min-height: 44px;
   }
 
   .swipe-hint {
     display: flex;
+    font-size: 13px;
+    line-height: 1.4;
   }
 
+  /* Mobile Record Cards - Large, Vertical Stack */
+  .record-card {
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-strong);
+  }
+
+  .record-card-header {
+    padding: 14px 16px;
+  }
+
+  .record-card-title {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .record-card-body {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .record-card-label {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1e293b;
+  }
+
+  .record-card-input {
+    min-height: 50px;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--border-strong);
+  }
+
+  /* Table inputs on mobile if table view is chosen */
+  td input {
+    font-size: 16px;
+    min-height: 44px;
+    padding: 8px 10px;
+    min-width: 140px;
+  }
+
+  th {
+    font-size: 13px;
+    padding: 12px 10px;
+  }
+
+  /* Footer Buttons */
   .table-footer {
     flex-direction: column;
     width: 100%;
-    gap: 10px;
+    gap: 12px;
+    padding-top: 16px;
   }
 
   .table-footer .btn {
     width: 100%;
     justify-content: center;
-  }
-
-  .record-card-body {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 12px;
-  }
-
-  td input {
-    font-size: 14px;
-    min-height: 36px;
-    padding: 6px 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .brand-title {
+    min-height: 52px;
     font-size: 16px;
-  }
-
-  .brand-subtitle {
-    font-size: 11px;
-  }
-
-  .card {
-    padding: 14px 10px;
-  }
-
-  .btn {
-    padding: 12px 14px;
-    font-size: 13px;
   }
 }

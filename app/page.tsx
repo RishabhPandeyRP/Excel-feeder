@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import motherSchema from "@/config/master-schema.json";
 import childSchema from "@/config/child-schema.json";
 import type { SchemaType } from "@/types/schema";
@@ -74,6 +74,13 @@ export default function Home() {
   const [schemaMode, setSchemaMode] = useState<"auto" | SchemaType>("auto");
   const [activeSchema, setActiveSchema] = useState<SchemaType>("child");
   const [viewMode, setViewMode] = useState<"table" | "cards">("table");
+
+  // On mobile screens, automatically default to large vertical cards view
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      setViewMode("cards");
+    }
+  }, []);
 
   const [facility, setFacility] = useState("");
   const [subcenter, setSubcenter] = useState("");
@@ -659,13 +666,16 @@ export default function Home() {
                         const isDitto = val === '"';
                         return (
                           <div key={c.key} className="record-card-field">
-                            <label className="record-card-label">{c.header || c.key}</label>
+                            <div className="record-card-label-row">
+                              <label className="record-card-label">{c.header || c.key}</label>
+                              <span className="record-card-key-badge">{c.key}</span>
+                            </div>
                             <input
                               type="text"
                               className={`record-card-input ${isDitto ? "is-ditto" : ""}`}
                               value={val}
                               onChange={(e) => updateCell(ri, c.key, e.target.value)}
-                              placeholder=""
+                              placeholder={`Enter ${c.header || c.key}`}
                             />
                           </div>
                         );
